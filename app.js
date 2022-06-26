@@ -1,24 +1,29 @@
+//selection of all concerned html elements
 let averagetime = document.querySelector(".avgrt");
 let bestime = document.querySelector(".bestime");
 let buttonwords = document.querySelector("small");
 let button = document.querySelector(".reactbtn");
 let levels = document.querySelectorAll("#easy");
 let reload = document.querySelector("i");
+
+//score variables
 let buttoncount = 0;
 let bestcount = 0;
 let countervar = -1;
-let allowrefresh = "canplaythrough";
 
+//level of difficulty
 let spped = [1000, 800, 650];
 let sppedindex = 0;
 
+//occurs when start button is clicked
 function start(){
     button.setAttribute("onclick", "response()");
     button.style.backgroundColor = "#3A434C";
     button.innerText = " ";
 
+    //waits for 1s to give the player an element of surprise
     setTimeout(() => {
-
+        //constantly changes divs position
         let timeID = setInterval(() => {
             button.disabled = false;
             testtoggler = 0;
@@ -37,6 +42,7 @@ function start(){
                 button.style.fontSize = "13px";
                 button.innerText = "GAME OVER!!!";
 
+                //ensures reload button can be used only when user loses
                 reload.addEventListener("click", function refreshing(){
                     console.log("aworking");
                     buttoncount = 0;
@@ -51,7 +57,6 @@ function start(){
                 });
 
                 clearInterval(timeID);
-                // allowrefresh = "click";
 
             }
         }, spped[sppedindex])
@@ -59,7 +64,7 @@ function start(){
 
 }
 
-
+//when the green buttons are clicked, the code executed takes care of the score count anad best count
 function response(){
     button.disabled = true
     buttoncount++;
@@ -71,10 +76,13 @@ function response(){
     averagetime.innerText = `${buttoncount}`;
 }
 
+//a useless function to add to the "GAME OVER!!!" button
 function nofunc(){
     console.log("ain't going anywhere");
 }
 
+
+//button function that control the level of difficulty
 function easy(){
     sppedindex = 0;
 }
